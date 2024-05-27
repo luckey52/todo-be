@@ -1,5 +1,6 @@
 
 const Task = require("../model/Task");
+const userController = require("./user.controller");
 const taskController = {}; //taskController라는 객체를 만든다
 
 taskController.createTask = async (req, res) => {
@@ -45,5 +46,6 @@ taskController.deleteTask = async (req, res) => {
     res.status(400).json({ status: "fail", error });
   }
 };
+
 
 module.exports = taskController;

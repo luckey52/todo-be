@@ -23,7 +23,7 @@ userController.createUser = async (req, res) => {
 userController.loginWithEmail = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email }, "-createAt -updateAt -__v");
+    const user = await User.findOne({ email }, "-createdAt -updatedAt -__v");
     if (user) {
       const isMatch = bcrypt.compareSync(password, user.password);
       if (isMatch) {
@@ -32,8 +32,8 @@ userController.loginWithEmail = async (req, res) => {
       }
     }
     throw new Error("아이디 또는 비번이 일치하지 않습니다");
-  } catch (err) {
-    res.status(400).json({ status: "fail", error });
+  } catch (error) {
+    res.status(400).json({ status: "fail", message: error.message });
   }
 };
 
